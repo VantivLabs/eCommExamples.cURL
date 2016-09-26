@@ -1,13 +1,13 @@
 # eCommExamples.cURL
 cURL transaction examples - Vantiv eComm using LitleXML
 
-Payment transactions can be processed against Vantiv's internet accessible end-points for both on-line or batch transactions.
+Processing payment transactions involves sending and receiving XML formatted messages to and from Vantiv's internet accessible endpoints.
 
-Developers can code applications that send, receive and parse appropriately formatted XML transactions themselves, or they can choose to use one of Vantiv's language specific SDKs to simplify coding.
+Developers can build appropriate messages themselves, or they can choose to use one of Vantiv's [language specific SDKs](https://developer.vantiv.com/community/ecommerce/pages/sdks).  The XML specification is available [here](https://developer.vantiv.com/docs/DOC-1172).
 
-For clarity in the examples below we use cURL - a tool well known to most developers.
+For clarity, some examples are providing using  cURL.
 
-Vantiv has multple endpoints depending on whether you are testing an application, certifying it or are in production. These first examples show how to test applications against the Vantiv eCommerce sandbox.
+Vantiv has multple endpoints depending on whether you are testing an application, certifying it or are in production. These first examples show how to test applications against the Vantiv eCommerce sandbox. The sandbox is stateless and does not require any credentials to work. It is a good way to test simple transactions and make sure that your program is able to connect to the end point and send and receive appropriate formatted messages. Once you have basic functionality working you can request credentials and test against Vantiv's pre-live environment.
 
 ##Authorizing a transaction
 
