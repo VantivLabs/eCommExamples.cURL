@@ -1,5 +1,4 @@
 # eCommExamples.cURL
-cURL transaction examples - Vantiv eComm using LitleXML
 
 Processing payment transactions involves sending and receiving XML formatted messages to and from Vantiv's internet accessible endpoints.
 
@@ -80,9 +79,11 @@ $ ./litle_auth.sh
 
 Note the LitleTxnId (Litle Transaction Id). When your application parses the retrieved XML, you will want to retain this value. The specifics of the response are encoded in the <authorizationResponse> element. 
 
-####Capturing a transaction (capture.sh)
+##Capturing a transaction
 
 Capturing a transaction will cause Vantiv to initiate a transfer of the previously authorized amount from the cardholder's issuing bank to the merchant's bank account. Note that the capture transaction needs to reference the tranasction ID contained in the authorization response.
+
+####Capturing a transaction (capture.sh)
 
 ````
 #!/bin/sh
