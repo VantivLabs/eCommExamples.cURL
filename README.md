@@ -51,6 +51,12 @@ curl https://www.testlitle.com/sandbox/communicator/online --tlsv1.2  \
       </litleOnlineRequest>'
 ````
 
+An authorization transaction will make sure that sufficient funds exist on a payment card and hold those funds by reducing the credit limit by an amount that corresponds to the authorization amount.
+
+The authorization amount of $10.00 is shown in the <amount> element. You should not use a decimal character to delineate dollars and cents in the transaction. This example involves specifying real details about a payment card in the <card> element. 
+
+While the approach will work, and is a good way to get started, a better practice is to use a solution like [Vantiv's eProtect](https://developer.vantiv.com/docs/DOC-1203) that subsitutes real credit card information for a low-value token at the point of capture. We will extend this simple example to use an eProtect token as an alternative to providing a credit card later on.
+
 If running on a UNIX-like OS, remember to make the script executable.
 
 ````
@@ -72,6 +78,43 @@ $ ./litle_auth.sh
   </authorizationResponse>
 ````
 
+Note the LitleTxnId (Litle Transaction Id). When your application parses the retrieved XML, you will want to retain this value. The specifics of the response are encoded in the <authorizationResponse> element. 
+
+####Capturing a transaction (capture.sh)
+
+Capturing a transaction will cause Vantiv to initiate a transfer of the previously authorized amount from the cardholder's issuing bank to the merchant's bank account. Note that the capture transaction needs to reference the tranasction ID contained in the authorization response.
+
+````
+#!/bin/sh
+curl https://www.testlitle.com/sandbox/communicator/online --tlsv1.2  \
+   -H "Content-Type: text/xml; charset=UTF-8"  \
+   -X POST  \
+   -d  \
+     '<?xml version="1.0"?>
+      <litleOnlineRequest version="10.3" xmlns="http://www.litle.com/schema" merchantId="default">
+        <authentication>
+            <user>JoesStore</user>
+            <password>JoeyIsTheBe$t</password>
+        </authentication>
+        <capture id="ididid" reportGroup="Money2020" customerId="12345">
+            <litleTxnId>773597363117474000</litleTxnId>
+        </capture>
+      </litleOnlineRequest>'
+````
+
+When run the capture.sh script, you should see a response like the one below.
+
+````
+$ ./capture.sh
+<litleOnlineResponse version='10.1' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+  <captureResponse id='ididid' reportGroup='Money2020' customerId='12345'>
+    <litleTxnId>967858740538999001</litleTxnId>
+    <response>001</response>
+    <responseTime>2016-09-26T07:44:14</responseTime>
+    <message>Transaction Received</message>
+  </captureResponse>
+</litleOnlineResponse>
+````
 
 
 
