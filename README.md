@@ -81,7 +81,7 @@ Note the LitleTxnId (Litle Transaction Id). When your application parses the ret
 
 ##Capturing a transaction
 
-Capturing a transaction will cause Vantiv to initiate a transfer of the previously authorized amount from the cardholder's issuing bank to the merchant's bank account. Note that the capture transaction needs to reference the tranasction ID contained in the authorization response.
+Capturing a transaction will cause Vantiv to initiate a transfer of the previously authorized amount from the cardholder's issuing bank to the merchant's bank account. Note that the capture transaction needs to reference the transaction ID contained in the authorization response.
 
 ####Capturing a transaction (capture.sh)
 
