@@ -38,7 +38,7 @@ curl https://www.testlitle.com/sandbox/communicator/online --tlsv1.2  \
                 <state>CA</state>
                 <zip>95032</zip>
                 <country>USA</country>
-                <email>jdoe@litle.com</email>
+                <email>my-email-address@vantiv.com</email>
                 <phone>978-551-0040</phone>
             </billToAddress>
             <card>
@@ -50,6 +50,28 @@ curl https://www.testlitle.com/sandbox/communicator/online --tlsv1.2  \
         </authorization>
       </litleOnlineRequest>'
 ````
+
+If running on a UNIX-like OS, remember to make the script executable.
+
+````
+$ chmod +x litle_auth.sh
+````
+
+Running the script should yield the following output:
+
+````
+$ ./litle_auth.sh
+<litleOnlineResponse version='10.1' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+  <authorizationResponse id='ididid' reportGroup='Money2020' customerId='12345'>
+    <litleTxnId>773597363117474000</litleTxnId>
+    <orderId>1</orderId>
+    <response>000</response>
+    <responseTime>2016-09-26T07:24:19</responseTime>
+    <message>Approved</message>
+    <authCode>43741</authCode>
+  </authorizationResponse>
+````
+
 
 
 
